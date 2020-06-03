@@ -23,6 +23,7 @@ public class PlayerController : MonoBehaviour {
     private float cameraSpeed = 3.0f;
     private float? cameraStartTime = null;
     public Transform playerCameraTarget;
+    private Monitor activeMonitor = null;
 
     // Use this for initialization
     void Start () {
@@ -178,11 +179,17 @@ public class PlayerController : MonoBehaviour {
         {
             if (monitor != null)
             {
+                activeMonitor = monitor;
                 cameraTarget = monitor.cameraTarget;
             }
         }
         else
         {
+            if (activeMonitor != null)
+            {
+                activeMonitor.terminalUI.UsingTerminal(false);
+                activeMonitor = null;
+            }
             cameraTarget = playerCameraTarget;
         }
     }

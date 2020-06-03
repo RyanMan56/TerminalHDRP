@@ -8,6 +8,8 @@ public class Monitor : MonoBehaviour
     public Transform cameraTarget;
     private GameObject player;
     private PlayerController playerController;
+    public GameObject ui;
+    public TerminalUI terminalUI;
     public bool on = true;
     public bool carried = false;
 
@@ -16,6 +18,7 @@ public class Monitor : MonoBehaviour
     {
         player = GameObject.Find("Player");
         playerController = player.GetComponent<PlayerController>();
+        terminalUI = ui.GetComponent<TerminalUI>();
     }
 
     // Update is called once per frame
@@ -40,9 +43,11 @@ public class Monitor : MonoBehaviour
                     if (hit.collider.Equals(screen.GetComponent<MeshCollider>()))
                     {
                         playerController.SetUsingTerminal(true, this);
+                        terminalUI.UsingTerminal(true);
+
                     }
                 }
             }
         }
-    }
+    }    
 }
