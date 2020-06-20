@@ -10,6 +10,7 @@ public class TerminalUI : MonoBehaviour
     private float height;
     public bool active = false;
     public TerminalCursor cursor;
+    public int terminalId;
 
 
     // Start is called before the first frame update

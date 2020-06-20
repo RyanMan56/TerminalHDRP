@@ -12,6 +12,7 @@ public class Monitor : MonoBehaviour
     public TerminalUI terminalUI;
     public bool on = true;
     public bool carried = false;
+    public int terminalId;
 
     // Start is called before the first frame update
     void Start()
@@ -19,6 +20,7 @@ public class Monitor : MonoBehaviour
         player = GameObject.Find("Player");
         playerController = player.GetComponent<PlayerController>();
         terminalUI = ui.GetComponent<TerminalUI>();
+        terminalUI.terminalId = terminalId;
     }
 
     // Update is called once per frame

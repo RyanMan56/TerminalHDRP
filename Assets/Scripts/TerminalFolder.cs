@@ -1,22 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
 
-public class TerminalFolder : MonoBehaviour
+[System.Serializable]
+public class TerminalFolder
 {
-    public string folderName;
-    public TMP_Text text;
+    public string name;
+    public TerminalFolder[] folders;
+    public TerminalFile[] files;
 
-    // Start is called before the first frame update
-    void Start()
+    public TerminalFolder(string name, TerminalFolder[] folders, TerminalFile[] files)
     {
-        text.text = folderName;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        this.name = name;
+        this.folders = folders;
+        this.files = files;
     }
 }

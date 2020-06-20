@@ -6,7 +6,8 @@ public class TerminalCursor : MonoBehaviour
 {
     public Transform bottomLeft;
     public Transform topRight;
-    private float mouseSpeed = 2.75f;
+    //private float mouseSpeed = 2.75f;
+    private float mouseSpeed = 0.275f;
     public AudioSource clickIn1;
     public AudioSource clickOut1;
     public AudioSource clickIn2;
@@ -29,8 +30,8 @@ public class TerminalCursor : MonoBehaviour
 
     public Transform MoveCursor()
     {
-        float dx = Input.GetAxis("Mouse X") * mouseSpeed * Time.deltaTime;
-        float dy = Input.GetAxis("Mouse Y") * mouseSpeed * Time.deltaTime;
+        float dx = Input.GetAxis("Mouse X") * mouseSpeed;
+        float dy = Input.GetAxis("Mouse Y") * mouseSpeed;
 
         transform.Translate(new Vector3(dx * mouseSpeed, dy * mouseSpeed, 0), Space.Self);
         float newX = transform.localPosition.x > topRight.localPosition.x
@@ -94,6 +95,7 @@ public class TerminalCursor : MonoBehaviour
     {
         Vector3 distance = transform.position - mouseDownPosition.Value;
         highlight.size = new Vector2(distance.x / highlight.transform.localScale.x, distance.y / highlight.transform.localScale.y);
-        highlight.transform.localPosition = transform.localPosition - new Vector3(distance.x / 2, distance.y / 2);
+        Vector3 newHighlightLocalPosition = transform.localPosition - new Vector3(distance.x / 2, distance.y / 2);
+        highlight.transform.localPosition = new Vector3(newHighlightLocalPosition.x, newHighlightLocalPosition.y, highlight.transform.localPosition.z);
     }
 }
