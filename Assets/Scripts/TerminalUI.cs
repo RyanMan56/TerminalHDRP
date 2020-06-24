@@ -11,6 +11,7 @@ public class TerminalUI : MonoBehaviour
     public bool active = false;
     public TerminalCursor cursor;
     public int terminalId;
+    public GameObject elements;
 
 
     // Start is called before the first frame update
@@ -25,12 +26,7 @@ public class TerminalUI : MonoBehaviour
     {
         if (active)
         {
-            cursor.MoveCursor();
-            cursor.Click();
-            if (cursor.mouseDownPosition.HasValue)
-            {
-                cursor.Drag();
-            }
+            cursor.UpdateCursor(elements);
         }
     }
 
