@@ -26,7 +26,14 @@ public class TerminalUI : MonoBehaviour
     {
         if (active)
         {
-            cursor.UpdateCursor(elements);
+            MouseActions mouseActions = cursor.UpdateCursor(elements);
+            //Debug.Log("-------------------");
+            //Debug.Log(mouseActions.selectedElements.Count);
+            //foreach (GameObject g in mouseActions.selectedElements)
+            //{
+            //    Debug.Log(g);
+            //}
+            //Debug.Log(mouseActions.hoveredElement);
         }
     }
 

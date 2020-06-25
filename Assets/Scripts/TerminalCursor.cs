@@ -4,15 +4,22 @@ using UnityEngine;
 
 public class MouseActions
 {
-    public List<GameObject> hoveredElements;
+    public GameObject hoveredElement;
     public List<GameObject> selectedElements;
     public GameObject elementToOpen;
 
-    public MouseActions(List<GameObject> hoveredElements, List<GameObject> selectedElements, GameObject elementToOpen)
+    public MouseActions(GameObject hoveredElement, List<GameObject> selectedElements, GameObject elementToOpen)
     {
-        this.hoveredElements = hoveredElements;
+        this.hoveredElement = hoveredElement;
         this.selectedElements = selectedElements;
         this.elementToOpen = elementToOpen;
+    }
+
+    public MouseActions()
+    {
+        this.hoveredElement = null;
+        this.selectedElements = new List<GameObject>();
+        this.elementToOpen = null;
     }
 }
 
@@ -31,16 +38,20 @@ public class TerminalCursor : MonoBehaviour
     private int canvasLayerMask = 10;
 
     public Vector3? mouseDownPosition = null; // world position
+    private MouseActions mouseActions;
+
+    private void Start()
+    {
+        mouseActions = new MouseActions();
+    }
 
     public MouseActions UpdateCursor(GameObject elements)
     {
-        List<GameObject> selectedElements = new List<GameObject>();
-
         MoveCursor();
+        Raycast();
         Click();
-        selectedElements = Drag(elements);
-
-        MouseActions mouseActions = new MouseActions(null, selectedElements, null);
+        Drag(elements);
+        
         return mouseActions;
     }
 
@@ -107,7 +118,7 @@ public class TerminalCursor : MonoBehaviour
         }
     }
 
-    public List<GameObject> Drag(GameObject elements)
+    public void Drag(GameObject elements)
     {
         if (mouseDownPosition.HasValue)
         {
@@ -115,34 +126,34 @@ public class TerminalCursor : MonoBehaviour
             highlight.size = new Vector2(distance.x / highlight.transform.localScale.x, distance.y / highlight.transform.localScale.y);
             Vector3 newHighlightLocalPosition = transform.localPosition - new Vector3(distance.x / 2, distance.y / 2);
             highlight.transform.localPosition = new Vector3(newHighlightLocalPosition.x, newHighlightLocalPosition.y, highlight.transform.localPosition.z);
-            Bounds highlightBounds = new Bounds(transform.position, highlight.size);
+
+            Bounds highlightBounds = new Bounds(highlight.transform.position, new Vector3(Mathf.Abs(distance.x), Mathf.Abs(distance.y), 1));
 
             List<GameObject> selectedElements = new List<GameObject>();
-            foreach (GameObject e in elements.transform)
+            foreach (Transform t in elements.transform)
             {
-                if (highlightBounds.Contains(e.transform.position))
+                if (highlightBounds.Contains(t.position))
                 {
-                    selectedElements.Add(e);
+                    selectedElements.Add(t.gameObject);
                 }
             }
 
-            return selectedElements;
+            mouseActions.selectedElements = selectedElements;
         }
-
-        return null;
     }
 
-    public RaycastHit? Raycast()
+    public void Raycast()
     {
         // Check raycast against all layers except cursorLayerMask
         int layerMask = ~(1 << cursorLayerMask | 1 << canvasLayerMask);
+        
+        Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * 2.0f, Color.red);
 
         RaycastHit hit;
-        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.back), out hit, 1.0f, layerMask))
+        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, 2.0f, layerMask))
         {
-            return hit;
+            Debug.Log(hit);
+            mouseActions.hoveredElement = hit.transform.gameObject;
         }
-
-        return null;
     }
 }
