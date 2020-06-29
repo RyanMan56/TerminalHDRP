@@ -152,8 +152,11 @@ public class TerminalCursor : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, 2.0f, layerMask))
         {
-            Debug.Log(hit);
             mouseActions.hoveredElement = hit.transform.gameObject;
+        }
+        else
+        {
+            mouseActions.hoveredElement = null;
         }
     }
 }

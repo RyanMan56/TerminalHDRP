@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class PlayerController : MonoBehaviour {
-    private float defaultSpeed = 6.0f, speed = 6.0f;
+    private float defaultSpeed = 4.0f, speed = 4.0f;
     private float mouseSensitivity = 2.0f;
     private Vector3 moveDirection = Vector3.zero;
     private CharacterController controller;
@@ -23,7 +23,8 @@ public class PlayerController : MonoBehaviour {
     private float cameraSpeed = 3.0f;
     private float? cameraStartTime = null;
     public Transform playerCameraTarget;
-    private Monitor activeMonitor = null;
+    private Monitor activeMonitor = null;    
+    public Animator walkAnim;
 
     // Use this for initialization
     void Start () {
@@ -80,11 +81,20 @@ public class PlayerController : MonoBehaviour {
             }
 
             moveDirection = new Vector3(Input.GetAxis("Horizontal") * speed, verticalVelocity, Input.GetAxis("Vertical") * speed);
-            moveDirection = transform.TransformDirection(moveDirection);
-
-            controller.Move(moveDirection * Time.deltaTime);
+            moveDirection = transform.TransformDirection(moveDirection);            
+        } else
+        {
+            moveDirection = Vector3.zero;
         }
 
+        ViewBobbing(moveDirection);
+        controller.Move(moveDirection * Time.deltaTime);
+    }
+
+    void ViewBobbing(Vector3 moveVectors)
+    {
+        float squaredSpeed = moveVectors.x * moveVectors.x + moveVectors.z * moveVectors.z;
+        walkAnim.SetFloat("Speed", squaredSpeed);
     }
 
     void CheckMoveExit()
@@ -182,6 +192,7 @@ public class PlayerController : MonoBehaviour {
                 activeMonitor = monitor;
                 cameraTarget = monitor.cameraTarget;
             }
+            walkAnim.enabled = false;
         }
         else
         {
@@ -190,6 +201,7 @@ public class PlayerController : MonoBehaviour {
                 activeMonitor.terminalUI.UsingTerminal(false);
                 activeMonitor = null;
             }
+            walkAnim.enabled = true;
             cameraTarget = playerCameraTarget;
         }
     }

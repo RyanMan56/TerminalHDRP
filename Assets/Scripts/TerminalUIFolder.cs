@@ -15,14 +15,15 @@ public class TerminalUIFolder : MonoBehaviour
     private BoxCollider boxCollider;
     private float boxColliderSizeZ = 0.1f;
     private float boxColliderPaddingY = 0.2f;
+    public SpriteRenderer hoverSpriteRenderer;
 
     // Start is called before the first frame update
     void Start()
-    {
-        text.text = folderName;
-
-        Canvas.ForceUpdateCanvases();
-        textRectTransform = text.gameObject.GetComponent<RectTransform>();
+    {       
+        text.text = folderName;        
+        
+        textRectTransform = text.gameObject.GetComponent<RectTransform>();        
+        textRectTransform.sizeDelta = new Vector2(textRectTransform.sizeDelta.x, text.GetPreferredValues().y);
         textRectTransform.localPosition = new Vector3(0, baseTextPos - textRectTransform.rect.height * textRectTransform.localScale.y / 2);
 
         iconSpriteRenderer = icon.GetComponent<SpriteRenderer>();
@@ -35,12 +36,27 @@ public class TerminalUIFolder : MonoBehaviour
         Vector3 size = topLeft - bottomRight;
         size.y = size.y + boxColliderPaddingY;
         size.z = boxColliderSizeZ;
-        boxCollider.size = size;
-    }    
+        boxCollider.size = new Vector3(Mathf.Abs(size.x), Mathf.Abs(size.y), Mathf.Abs(size.z));
+        
+        hoverSpriteRenderer.transform.localPosition = new Vector3(boxCollider.center.x, boxCollider.center.y, hoverSpriteRenderer.transform.localPosition.z);
+        hoverSpriteRenderer.size = new Vector2(boxCollider.size.x / hoverSpriteRenderer.transform.localScale.x, boxCollider.size.y / hoverSpriteRenderer.transform.localScale.y);
+        hoverSpriteRenderer.enabled = false;
+    }
 
     // Update is called once per frame
     void Update()
     {
-        
+    }
+
+    public void SetHovering(bool hovering)
+    {
+        this.hovered = hovering;
+        if (hovering)
+        {
+            hoverSpriteRenderer.enabled = true;
+        } else
+        {
+            hoverSpriteRenderer.enabled = false;
+        }
     }
 }
