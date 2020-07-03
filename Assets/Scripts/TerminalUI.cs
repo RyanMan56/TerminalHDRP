@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class TerminalUI : MonoBehaviour
 {
@@ -30,18 +31,9 @@ public class TerminalUI : MonoBehaviour
             MouseActions mouseActions = cursor.UpdateCursor(elements);
             if (prevMouseActions != null && mouseActions != prevMouseActions)
             {
-                if (prevMouseActions.hoveredElement != mouseActions.hoveredElement)
-                {
-                    if (prevMouseActions.hoveredElement)
-                    {
-                        prevMouseActions.hoveredElement.SendMessage("SetHovering", false);
-                    }
-                    if (mouseActions.hoveredElement)
-                    {
-                        mouseActions.hoveredElement.SendMessage("SetHovering", true);
-                    }
-                }
-            }            
+                CheckHoveredElement(prevMouseActions, mouseActions);
+                CheckSelectedElements(prevMouseActions, mouseActions);
+            }
 
             prevMouseActions = new MouseActions(mouseActions.hoveredElement, mouseActions.selectedElements, mouseActions.elementToOpen);
         }
@@ -49,6 +41,37 @@ public class TerminalUI : MonoBehaviour
 
     public void UsingTerminal(bool isUsing) {
         active = isUsing;
+    }
+
+    void CheckHoveredElement(MouseActions prevMouseActions, MouseActions mouseActions)
+    {
+        if (prevMouseActions.hoveredElement != mouseActions.hoveredElement)
+        {
+            if (prevMouseActions.hoveredElement)
+            {
+                prevMouseActions.hoveredElement.SendMessage("SetHovering", false);
+            }
+            if (mouseActions.hoveredElement)
+            {
+                mouseActions.hoveredElement.SendMessage("SetHovering", true);
+            }
+        }
+    }
+
+    void CheckSelectedElements(MouseActions prevMouseActions, MouseActions mouseActions)
+    {
+        List<GameObject> prevNotNew = prevMouseActions.selectedElements.Except(mouseActions.selectedElements).ToList();
+        List<GameObject> newNotPrev = mouseActions.selectedElements.Except(prevMouseActions.selectedElements).ToList();
+
+        foreach (GameObject g in prevNotNew)
+        {
+            g.SendMessage("SetSelected", false);
+        }
+
+        foreach (GameObject g in newNotPrev)
+        {
+            g.SendMessage("SetSelected", true);
+        }
     }
 
 

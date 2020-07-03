@@ -15,7 +15,7 @@ public class TerminalUIFolder : MonoBehaviour
     private BoxCollider boxCollider;
     private float boxColliderSizeZ = 0.1f;
     private float boxColliderPaddingY = 0.2f;
-    public SpriteRenderer hoverSpriteRenderer;
+    public SpriteRenderer hoverSpriteRenderer, selectSpriteRenderer;
 
     // Start is called before the first frame update
     void Start()
@@ -41,6 +41,10 @@ public class TerminalUIFolder : MonoBehaviour
         hoverSpriteRenderer.transform.localPosition = new Vector3(boxCollider.center.x, boxCollider.center.y, hoverSpriteRenderer.transform.localPosition.z);
         hoverSpriteRenderer.size = new Vector2(boxCollider.size.x / hoverSpriteRenderer.transform.localScale.x, boxCollider.size.y / hoverSpriteRenderer.transform.localScale.y);
         hoverSpriteRenderer.enabled = false;
+
+        selectSpriteRenderer.transform.localPosition = hoverSpriteRenderer.transform.localPosition;
+        selectSpriteRenderer.size = hoverSpriteRenderer.size;
+        selectSpriteRenderer.enabled = hoverSpriteRenderer.enabled;
     }
 
     // Update is called once per frame
@@ -51,12 +55,12 @@ public class TerminalUIFolder : MonoBehaviour
     public void SetHovering(bool hovering)
     {
         this.hovered = hovering;
-        if (hovering)
-        {
-            hoverSpriteRenderer.enabled = true;
-        } else
-        {
-            hoverSpriteRenderer.enabled = false;
-        }
+        hoverSpriteRenderer.enabled = hovering;
+    }
+
+    public void SetSelected(bool selected)
+    {
+        this.selected = selected;
+        selectSpriteRenderer.enabled = selected;
     }
 }

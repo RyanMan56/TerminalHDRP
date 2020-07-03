@@ -132,7 +132,8 @@ public class TerminalCursor : MonoBehaviour
             List<GameObject> selectedElements = new List<GameObject>();
             foreach (Transform t in elements.transform)
             {
-                if (highlightBounds.Contains(t.position))
+                //if (highlightBounds.Contains(t.position))
+                if (highlightBounds.Intersects(t.GetComponent<BoxCollider>().bounds))
                 {
                     selectedElements.Add(t.gameObject);
                 }
