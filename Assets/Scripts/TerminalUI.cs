@@ -13,6 +13,7 @@ public class TerminalUI : MonoBehaviour
     public TerminalCursor cursor;
     public int terminalId;
     public GameObject elements;
+    public GameObject taskbar;
     private MouseActions prevMouseActions;
 
 
@@ -28,7 +29,7 @@ public class TerminalUI : MonoBehaviour
     {
         if (active)
         {
-            MouseActions mouseActions = cursor.UpdateCursor(elements);
+            MouseActions mouseActions = cursor.UpdateCursor(elements, taskbar);
             if (prevMouseActions != null && mouseActions != prevMouseActions)
             {
                 CheckHoveredElement(prevMouseActions, mouseActions);

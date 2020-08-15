@@ -40,7 +40,8 @@ public class Monitor : MonoBehaviour
             {
                 Ray ray = Camera.main.ScreenPointToRay(new Vector2((Screen.width - 1) / 2, (Screen.height - 1) / 2));
                 RaycastHit hit;
-                if (Physics.Raycast(ray, out hit, 1.5f))
+                int layerMask = ~(1 << 11); // Layer 11 is "Terminal UI"
+                if (Physics.Raycast(ray, out hit, 1.5f, layerMask))
                 {
                     if (hit.collider.Equals(screen.GetComponent<MeshCollider>()))
                     {

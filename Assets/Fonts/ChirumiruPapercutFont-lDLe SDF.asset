@@ -9,7 +9,7 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: ChirumiruPapercutFont-lDLe SDF Material
   m_Shader: {fileID: 4800000, guid: 68e6db2ebdc24f95958faec2be5558d6, type: 3}
-  m_ShaderKeywords: BEVEL_ON GLOW_ON UNDERLAY_ON
+  m_ShaderKeywords: BEVEL_ON UNDERLAY_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -51,7 +51,7 @@ Material:
     - _ColorMask: 15
     - _CullMode: 0
     - _Diffuse: 0
-    - _FaceDilate: -0.4
+    - _FaceDilate: -0.3
     - _FaceUVSpeedX: 0
     - _FaceUVSpeedY: 0
     - _GlowInner: 1
@@ -69,8 +69,8 @@ Material:
     - _PerspectiveFilter: 0.875
     - _Reflectivity: 5
     - _ScaleRatioA: 0.8333333
-    - _ScaleRatioB: 1.0104166
-    - _ScaleRatioC: 1.0104166
+    - _ScaleRatioB: 0.9270833
+    - _ScaleRatioC: 0.9270833
     - _ScaleX: 1
     - _ScaleY: 1
     - _ShaderFlags: 0
@@ -97,11 +97,11 @@ Material:
     - _FaceColor: {r: 1, g: 1, b: 1, a: 1}
     - _GlowColor: {r: 0.48235297, g: 0.34117648, b: 0.5058824, a: 0.5}
     - _MaskCoord: {r: 0, g: 0, b: 32767, a: 32767}
-    - _OutlineColor: {r: 0.5529412, g: 0.41176474, b: 0.62352943, a: 1}
+    - _OutlineColor: {r: 0.6313726, g: 0.5254902, b: 0.74509805, a: 1}
     - _ReflectFaceColor: {r: 0, g: 0, b: 0, a: 1}
     - _ReflectOutlineColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}
-    - _UnderlayColor: {r: 0.47058827, g: 0.3372549, b: 0.49803925, a: 1}
+    - _UnderlayColor: {r: 0.6313726, g: 0.5254902, b: 0.74509805, a: 1}
   m_BuildTextureStacks: []
 --- !u!28 &-2475301947336945585
 Texture2D:

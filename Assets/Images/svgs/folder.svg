@@ -26,8 +26,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.70710678"
-     inkscape:cx="1084.8325"
-     inkscape:cy="804.58351"
+     inkscape:cx="382.17903"
+     inkscape:cy="446.45116"
      inkscape:document-units="mm"
      inkscape:current-layer="g838"
      showgrid="false"
@@ -44,7 +44,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -61,19 +61,22 @@
          inkscape:connector-curvature="0"
          style="fill:#8ac8f8;fill-opacity:1;stroke-width:17.8571434"
          inkscape:export-xdpi="96"
-         inkscape:export-ydpi="96" />
+         inkscape:export-ydpi="96"
+         inkscape:export-filename="L:\Projects\TerminalHDRP\Assets\Images\folder.png" />
       <path
          id="path817"
          d="m -36.597402,-354.0158 48.33929,48.33929 5.23214,5.23214 h 7.39286 267.857142 V 38.841342 H -172.06169 V -354.0158 h 135.464288 m 7.39286,-17.85714 H -189.91883 V 56.698485 H 310.08118 V -318.30151 H 24.366888 Z"
          inkscape:connector-curvature="0"
-         style="fill:#8d699f;fill-opacity:1;stroke-width:17.8571434"
+         style="fill:#a186bf;fill-opacity:1;stroke-width:17.8571434"
          inkscape:export-xdpi="96"
-         inkscape:export-ydpi="96" />
+         inkscape:export-ydpi="96"
+         inkscape:export-filename="L:\Projects\TerminalHDRP\Assets\Images\folder.png" />
       <g
          id="g823"
          transform="matrix(17.857143,0,0,17.857143,-207.77598,-425.44437)"
          inkscape:export-xdpi="96"
-         inkscape:export-ydpi="96">
+         inkscape:export-ydpi="96"
+         inkscape:export-filename="L:\Projects\TerminalHDRP\Assets\Images\folder.png">
         <path
            id="path819"
            d="m 1.5,26.5 v -18 h 8.651 l 3,-2 H 28.5 v 20 z"

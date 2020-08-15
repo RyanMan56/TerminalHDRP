@@ -45,7 +45,7 @@ public class TerminalCursor : MonoBehaviour
         mouseActions = new MouseActions();
     }
 
-    public MouseActions UpdateCursor(GameObject elements)
+    public MouseActions UpdateCursor(GameObject elements, GameObject taskbar)
     {
         MoveCursor();
         Raycast();

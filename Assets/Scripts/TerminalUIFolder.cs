@@ -11,7 +11,7 @@ public class TerminalUIFolder : MonoBehaviour
     public bool hovered, selected, open;
     private RectTransform textRectTransform;
     private float baseTextPos = -0.344f;
-    private SpriteRenderer iconSpriteRenderer;
+    private MeshCollider iconSpriteRenderer;
     private BoxCollider boxCollider;
     private float boxColliderSizeZ = 0.1f;
     private float boxColliderPaddingY = 0.2f;
@@ -26,9 +26,9 @@ public class TerminalUIFolder : MonoBehaviour
         textRectTransform.sizeDelta = new Vector2(textRectTransform.sizeDelta.x, text.GetPreferredValues().y);
         textRectTransform.localPosition = new Vector3(0, baseTextPos - textRectTransform.rect.height * textRectTransform.localScale.y / 2);
 
-        iconSpriteRenderer = icon.GetComponent<SpriteRenderer>();
+        iconSpriteRenderer = icon.GetComponent<MeshCollider>();
         // topLeft calculated from the width of the text
-        Vector3 topLeft = icon.transform.localPosition - new Vector3(textRectTransform.rect.width * textRectTransform.localScale.x / 2, -iconSpriteRenderer.size.y * iconSpriteRenderer.transform.localScale.y / 2);
+        Vector3 topLeft = icon.transform.localPosition - new Vector3(textRectTransform.rect.width * textRectTransform.localScale.x / 2, -iconSpriteRenderer.bounds.size.y * iconSpriteRenderer.transform.localScale.y / 2);
         Vector3 bottomRight = textRectTransform.transform.localPosition + new Vector3(textRectTransform.rect.width * textRectTransform.localScale.x / 2, -textRectTransform.rect.height * textRectTransform.localScale.y / 2);
 
         boxCollider = GetComponent<BoxCollider>();
